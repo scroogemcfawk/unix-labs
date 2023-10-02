@@ -1,0 +1,16 @@
+All source files should be in src dir.
+
+Main script - grdl.sh
+
+Script commands:
+    grdl.sh COMMAND
+
+grdl.sh command options:
+    clean - remove all temp files and folders
+    build - compile sources from src/ into build/
+    jar - make executable jar (takes 1 argument - MainClassName)
+        example: ./grdl.sh jar App
+    jjar - make jar exec and clean (takes 1 argument - MainClassName)
+
+Note:
+    Script requires javac command available from shell
