@@ -9,11 +9,11 @@ grdl.sh command options:
     clean - remove all temp files and folders
     build - compile sources from src/ into build/
     jar [MainClassName] - make executable jar. If class name is not provided,
-                          searches for file with ///MainClass// comment and
+                          searches for file with ///MainClass/// comment and
                           uses it as main class.
         example: ./grdl.sh jar App
     jjar [MainClassName] - make jar exec and clean. If class name is not provided,
-                           searches for file with ///MainClass// comment and
+                           searches for file with ///MainClass/// comment and
                            uses it as main class.
 
 Note:
