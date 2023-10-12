@@ -1,5 +1,6 @@
 import java.util.Arrays;
 
+
 public class Printer
 {
     static void print(String[] args, String sep, String end)
@@ -8,5 +9,10 @@ public class Printer
             System.out.print(i + sep);
         }
         System.out.print(args[args.length - 1] + end);
+    }
+
+    public static void main(String[] args)
+    {
+        System.out.println("Hi, I am Printer!");
     }
 }

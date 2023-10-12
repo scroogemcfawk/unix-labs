@@ -3,7 +3,8 @@
 quiet=0
 buildDir="build"
 manifest=".mf"
-mainClass="App"
+mainClass=""
+mainClassResolution="._tempMainClassResolution"
 
 clean () {
   ls -A | grep $1 | xargs rm -r &> /dev/null
@@ -17,6 +18,7 @@ cleanTemp () {
 cleanBuild () {
   say ":cleanBuild"
   clean "^\(out\|build\)$"
+  clean "^\(build\.\w\{3\}\.tempBuild\)$"
 }
 
 cleanAll () {
@@ -25,6 +27,7 @@ cleanAll () {
   cleanTemp
   clean "*.mf"
   clean "*.jar"
+  clean $mainClassResolution
 }
 
 say () {
@@ -77,12 +80,13 @@ jjar () {
   cleanBuild
   cleanTemp
   clean "*.mf"
+  clean $mainClassResolution
 }
 
 build () {
   say ":build"
   cleanAll
-  mkdir "$buildDir"
+  mktemp -d --suffix=".tempBuild" "$buildDir"".XXX"
   compile
 }
 
@@ -126,10 +130,20 @@ taskHandler () {
     ;;
     "jjar")
       say "Task: jjar"
-      if [[ ! $# -eq 2 ]]; then
-        EXIT "Illegal number of arguments. jjar must contain only main class name."
+      if [[ $# -eq 1 ]]; then
+        grep -Rnwl . -e '\/\/\/MainClass\/\/\/' > $mainClassResolution
+        if [[ ! $(wc -l < $mainClassResolution) -eq 1 ]]; then
+          EXIT "Main class not found."
+        fi
+        mainClass=$(sed 's/\(\.\w\+\|\(\(\w\|\.\)\+\/\)\)//g' < $mainClassResolution)
+        jjar
+        return
+      elif [[ $# -eq 2 ]]; then
+        mainClass=$2
+        jjar
+        return
       fi
-      mainClass=$2
+      EXIT "Main class is not provided."
       jjar
     ;;
     *)
