@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c4439-345c-453d-ae4a-db18ef06eb3d" name="Changes" comment="Fix: readme typo">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/lab-1-build-system/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buid-system.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildDockerImage.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grdl.sh" beforeDir="false" afterPath="$PROJECT_DIR$/lab-1-build-system/grdl.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-1-build-system/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Printer.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab-1-build-system/src/Printer.java" afterDir="false" />
+    <list default="true" id="621c4439-345c-453d-ae4a-db18ef06eb3d" name="Changes" comment="Project refactor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="20608" />
+    <option name="totalTimeSeconds" value="22813" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -134,7 +121,7 @@
       <workItem from="1699588901962" duration="60000" />
       <workItem from="1699588975183" duration="44000" />
       <workItem from="1699589028850" duration="62000" />
-      <workItem from="1699589102418" duration="1134000" />
+      <workItem from="1699589102418" duration="2922000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -160,7 +147,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697087910219</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Project refactor">
+      <option name="closed" value="true" />
+      <created>1699590414072</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699590414072</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,7 +176,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Finish build system lab" />
     <MESSAGE value="Fix: readme typo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: readme typo" />
+    <MESSAGE value="Project refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project refactor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
