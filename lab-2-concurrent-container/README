@@ -1,0 +1,10 @@
+script.sh is the script that runs on docker run inside the containers
+
+How to run:
+    1. Build a docker image with buildImage.sh (the result is smf/lab2:latest image)
+    2. Run the containers with run.sh [number of containers] (it also creates 2 shared volumes ./script and ./shared,
+    ./script one is used for updating a script so you don't have to rebuild an image again after changing it (every run.sh copies
+    a script into it), and ./shared is used as a shared space for '001', '002' etc files)
+    3. track.sh shows contents of all files in ./shared every second (Ctrl+C should exit)
+
+clean.sh cleans ./shared

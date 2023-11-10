@@ -27,3 +27,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+/lab-2-concurrent-container/script/
+/lab-2-concurrent-container/shared/
