@@ -37,9 +37,30 @@ say () {
   echo -e "$@"
 }
 
+sayTask () {
+  say "TASK $1"
+}
+
+sayComplete () {
+  say "TASK $1 DONE"
+}
+
 createManifest () {
   echo "Main-Class: $buildDir.$mainClass" > "$manifest"
   echo "" >> "$manifest"
+}
+
+resolveMain () {
+    if [[ $# -eq 1 ]]; then
+        grep -Rnwl ./src/ -e '\/\/\/MainClass\/\/\/' > $mainClassResolution
+        if [[ ! $(wc -l < $mainClassResolution) -eq 1 ]]; then
+            EXIT "Main class not found."
+        fi
+        mainClass=$(sed 's/\(\.\w\+\|\(\(\w\|\.\)\+\/\)\)//g' < $mainClassResolution)
+    elif [[ $# -eq 2 ]]; then
+        mainClass=$2
+        return
+    fi
 }
 
 checkMain () {
@@ -113,38 +134,42 @@ sayHelp () {
 taskHandler () {
   case $1 in
     "clean")
-      say "Task: clean"
+      sayTask "clean"
       cleanAll
+      sayComplete "clean"
     ;;
     "build")
-      say "Task: build"
+      sayTask "build"
       build
+      sayComplete "build"
     ;;
     "jar")
-      say "Task: jar"
+      sayTask "jar"
       if [[ ! $# -eq 2 ]]; then
-        EXIT "Illegal number of arguments. jjar must contain only main class name."
+        EXIT "Illegal number of arguments. jar must contain only main class name."
       fi
       mainClass=$2
       buildJar
+      sayComplete "jar"
     ;;
     "jjar")
-      say "Task: jjar"
+      sayTask "jjar"
       if [[ $# -eq 1 ]]; then
-        grep -Rnwl . -e '\/\/\/MainClass\/\/\/' > $mainClassResolution
+        grep -Rnwl ./src/ -e '\/\/\/MainClass\/\/\/' > $mainClassResolution
         if [[ ! $(wc -l < $mainClassResolution) -eq 1 ]]; then
           EXIT "Main class not found."
         fi
         mainClass=$(sed 's/\(\.\w\+\|\(\(\w\|\.\)\+\/\)\)//g' < $mainClassResolution)
         jjar
+        sayComplete "jjar"
         return
       elif [[ $# -eq 2 ]]; then
         mainClass=$2
         jjar
+        sayComplete "jjar"
         return
       fi
       EXIT "Main class is not provided."
-      jjar
     ;;
     *)
       say "Task is not recognized. See options:"
