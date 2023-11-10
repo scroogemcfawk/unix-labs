@@ -12,13 +12,13 @@ clean () {
 
 cleanTemp () {
   say ":cleanTemp"
-  clean "^$buildDir$"
+  clean "^\(build\.\w\{3\}\.tempBuild\)$"
 }
 
 cleanBuild () {
   say ":cleanBuild"
   clean "^\(out\|build\)$"
-  clean "^\(build\.\w\{3\}\.tempBuild\)$"
+  cleanTemp
 }
 
 cleanAll () {
@@ -93,6 +93,7 @@ buildJar () {
     EXIT "Main class $mainClass not found."
   fi
   jar -cfe "$mainClass.jar" "$mainClass" -C "$buildDir" .
+  cleanTemp
 }
 
 jjar () {
@@ -107,8 +108,9 @@ jjar () {
 build () {
   say ":build"
   cleanAll
-  mktemp -d --suffix=".tempBuild" "$buildDir"".XXX"
+  mktemp -d --suffix=".tempBuild" "$buildDir"".XXX" >> /dev/null
   compile
+  cleanTemp
 }
 
 compile () {
@@ -133,43 +135,26 @@ sayHelp () {
 
 taskHandler () {
   case $1 in
-    "clean")
+    "clean") # delete all temp and build files
       sayTask "clean"
       cleanAll
       sayComplete "clean"
     ;;
-    "build")
+    "build") # build src into $buildDir
       sayTask "build"
       build
       sayComplete "build"
     ;;
-    "jar")
+    "jar") # build task, but make jar
       sayTask "jar"
-      if [[ ! $# -eq 2 ]]; then
-        EXIT "Illegal number of arguments. jar must contain only main class name."
-      fi
-      mainClass=$2
+      resolveMain $#
       buildJar
       sayComplete "jar"
     ;;
-    "jjar")
+    "jjar") # jar task, but delete build
       sayTask "jjar"
-      if [[ $# -eq 1 ]]; then
-        grep -Rnwl ./src/ -e '\/\/\/MainClass\/\/\/' > $mainClassResolution
-        if [[ ! $(wc -l < $mainClassResolution) -eq 1 ]]; then
-          EXIT "Main class not found."
-        fi
-        mainClass=$(sed 's/\(\.\w\+\|\(\(\w\|\.\)\+\/\)\)//g' < $mainClassResolution)
-        jjar
-        sayComplete "jjar"
-        return
-      elif [[ $# -eq 2 ]]; then
-        mainClass=$2
-        jjar
-        sayComplete "jjar"
-        return
-      fi
-      EXIT "Main class is not provided."
+      resolveMain $#
+      jjar
     ;;
     *)
       say "Task is not recognized. See options:"
