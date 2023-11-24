@@ -30,6 +30,12 @@ cleanAll () {
   clean $mainClassResolution
 }
 
+cancelBuild () {
+    say ":cancel"
+    cleanAll
+    EXIT "Build has been cancelled"
+}
+
 say () {
   if [[ $quiet -eq 1 ]]; then
     return
@@ -169,4 +175,5 @@ if [[ $# == 0 ]]; then
   EXIT
 fi
 
+trap cancelBuild SIGINT
 taskHandler "$@"
